@@ -51,7 +51,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
@@ -156,13 +155,7 @@ fun BMICalculator() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        0f to Palette.Accent.copy(alpha = 0.09f),
-                        0.4f to Palette.Background,
-                        1f to Palette.Background
-                    )
-                )
+                .background(Palette.Background)
         ) {
             Column(
                 modifier = Modifier
@@ -244,14 +237,14 @@ fun BMICalculator() {
 private fun Header() {
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         Text(
-            text = "Body Mass Index Calculator",
+            text = "Body Mass Index calculator",
             color = Palette.TextPrimary,
             fontSize = 20.sp,
             fontWeight = FontWeight.Light,
             letterSpacing = 4.sp
         )
         Text(
-            text = "Insert your weight and height bellow and calculate your Body Mass Index:",
+            text = "Insert your weight and height bellow to calculate your Body Mass Index:",
             color = Palette.TextSecondary,
             fontSize = 15.sp
         )

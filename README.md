@@ -1,2 +1,98 @@
-# BodyMassIndexCalculator
-BMI Calculator app built with Kotlin using Jetpack Compose. It features real-time Body Mass Index calculations, health categories, and Metric unit support.
+# 📱 BMI Calculator
+
+A minimalist Android app that calculates Body Mass Index (BMI) and classifies the result using the WHO adult categories. Built with Kotlin and Jetpack Compose.
+
+## ✨ Features
+
+- 🧮 **Instant BMI calculation** from weight (kg) and height (cm)
+- 🏷️ **Automatic classification** into standard BMI categories
+- 🔢 **Numeric keyboard** for fast, easy input
+- 🌍 **Accepts both `.` and `,`** as decimal separators (e.g. `72.5` or `72,5`)
+- 🛡️ **Input validation**: filters out invalid characters and warns about empty, zero, or negative values
+- 🎯 **Result rounded** to one decimal place
+- 🎨 **Material 3** design with edge-to-edge display
+- 👀 **Compose Preview** support for quick UI iteration in Android Studio
+
+## 🧮 How it works
+
+BMI is calculated as:
+
+```
+BMI = weight (kg) / height (m)²
+```
+
+The result is rounded to one decimal place and classified as follows:
+
+| BMI (kg/m²)    | Category       |
+|----------------|----------------|
+| Below 18.5     | Underweight    |
+| 18.5 – 24.9    | Healthy Weight |
+| 25.0 – 29.9    | Overweight    |
+| 30.0 and above | Obesity      |
+
+> ⚠️ **Disclaimer:** BMI is a general screening tool. It does not account for muscle mass, age, sex or body composition, and it is not a medical diagnosis. Consult a healthcare professional for personal health advice.
+
+## 🛠️ Tech stack
+
+- [Kotlin](https://kotlinlang.org/)
+- [Jetpack Compose](https://developer.android.com/jetpack/compose) with [Material 3](https://m3.material.io/)
+- Android Gradle Plugin 9.0.0 with Gradle Kotlin DSL (`.kts`)
+- Gradle 9.1.0+, JDK 17 and `compileSdk` 36
+- `androidx.core:core-ktx` 1.18.0 and `androidx.lifecycle` 2.10.0 (newer releases require AGP 9.1+ and `compileSdk` 37)
+
+## 🚀 Getting started
+
+### 📋 Prerequisites
+
+- A recent version of [Android Studio](https://developer.android.com/studio) that supports AGP 9.0
+- JDK 17 (bundled with Android Studio)
+- Android SDK Platform 36, installed via **Tools → SDK Manager**
+
+### ▶️ Run the app
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/guilhermeoliveirateo/BodyMassIndexCalculator
+   ```
+
+2. Open the project folder in Android Studio and wait for the Gradle sync to finish.
+3. Select an emulator or a connected device and click **Run ▶**.
+
+To build a debug APK from the command line:
+
+```bash
+./gradlew assembleDebug
+```
+
+On Windows, use `gradlew.bat assembleDebug`. The APK is generated in `app/build/outputs/apk/debug/`.
+
+> 💡 **Tip:** keep the project outside synced folders such as OneDrive. Syncing can lock files in `app/build` and cause Gradle build errors.
+
+## 🩺 Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| **"Incompatible version of the Android Gradle plugin"** | Your Android Studio is older than the AGP used by the project. Update Android Studio, or set `agp = "9.0.0"` in `gradle/libs.versions.toml`. |
+| **Warning about `compileSdk` 37** | Set `compileSdk = 36` in `app/build.gradle.kts`, or update Android Studio and AGP. |
+| **AAR metadata errors (dependency requires AGP 9.1+ / `compileSdk` 37)** | Keep `core-ktx` at 1.18.0 and `lifecycle` at 2.10.0 in `gradle/libs.versions.toml`, or update Android Studio and AGP together. |
+| **"Unable to delete directory" in `app/build`** | Run `./gradlew --stop`, pause OneDrive, delete `app/build` and rebuild. Better: keep the project outside a synced folder. |
+| **`Unresolved reference` on `android.os.*` in the IDE** | The Gradle sync failed. Check the **Build → Sync** tab, install the matching SDK platform and sync again. |
+
+## 📂 Project structure
+
+```
+BodyMassIndexCalculator/
+├── app/
+│   └── src/main/java/br/com/BodyMassIndexCalculator/
+│       ├── MainActivity.kt      # UI (Compose) and BMI logic
+│       └── ui/theme/            # Theme files
+├── gradle/                      # Gradle wrapper and version catalog
+├── build.gradle.kts
+├── settings.gradle.kts
+└── gradle.properties
+```
+
+## 🎨 Design
+
+The interface is clean and minimal: a single centered column with 16dp padding and 12dp spacing, using the default Material 3 theme for colors and typography. Two outlined text fields and a full-width button form the input area, and the BMI value appears in plain body text below it, together with its category (Underweight, Healthy Weight, Overweight or Obesity).
